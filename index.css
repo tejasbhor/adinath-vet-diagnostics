@@ -54,6 +54,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -64,6 +66,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -734,6 +738,7 @@ img {
   display: flex;
   flex-direction: column;
   min-width: 0; /* Prevents grid layout overflow */
+  max-width: 100%;
 }
 
 .context-left-col .section-title {
@@ -819,6 +824,7 @@ img {
   flex-direction: column;
   gap: 30px;
   min-width: 0; /* Prevents grid layout overflow */
+  max-width: 100%;
 }
 
 .context-stats-grid {
@@ -874,6 +880,7 @@ img {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   width: 100%;
+  max-width: 100%;
   min-width: 0; /* Prevents overflow of the flex item */
 }
 
@@ -900,13 +907,16 @@ img {
 }
 
 .table-responsive {
+  display: block;
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
 .comparison-table {
   width: 100%;
+  min-width: 500px; /* Forces horizontal scrolling on mobile viewports rather than pushing page width */
   border-collapse: collapse;
   text-align: left;
   font-size: 0.95rem;
@@ -1746,6 +1756,7 @@ img {
   .comparison-container {
     padding: 24px 16px;
     width: 100%;
+    max-width: 100%;
     min-width: 0;
   }
   .comparison-table th {
@@ -1764,6 +1775,16 @@ img {
   }
   .section {
     padding: 40px 0;
+  }
+  .lab-setup-partner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+  }
+  .partner-logo-box {
+    width: 100%;
+    white-space: normal;
   }
   .top-bar {
     display: none; /* Hide top bar on mobile to save space */
@@ -1869,6 +1890,19 @@ img {
   }
   .context-stat-num {
     font-size: 1.4rem;
+  }
+  .info-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding-bottom: 10px;
+  }
+  .cookie-banner-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+  .cookie-banner-actions .btn {
+    width: 100%;
   }
 }
 
