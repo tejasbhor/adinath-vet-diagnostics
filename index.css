@@ -733,6 +733,7 @@ img {
 .context-left-col {
   display: flex;
   flex-direction: column;
+  min-width: 0; /* Prevents grid layout overflow */
 }
 
 .context-left-col .section-title {
@@ -817,6 +818,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  min-width: 0; /* Prevents grid layout overflow */
 }
 
 .context-stats-grid {
@@ -852,6 +854,7 @@ img {
   color: var(--color-secondary);
   margin-bottom: 6px;
   line-height: 1.1;
+  word-break: break-word; /* Prevents text overflow */
 }
 
 .context-stat-lbl {
@@ -870,6 +873,8 @@ img {
   padding: 40px;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
+  width: 100%;
+  min-width: 0; /* Prevents overflow of the flex item */
 }
 
 .comparison-title {
@@ -1735,6 +1740,28 @@ img {
   :root {
     --header-height: 70px;
   }
+  .container {
+    padding: 0 1rem;
+  }
+  .comparison-container {
+    padding: 24px 16px;
+    width: 100%;
+    min-width: 0;
+  }
+  .comparison-table th {
+    padding: 12px 8px;
+    font-size: 0.8rem;
+  }
+  .comparison-table td {
+    padding: 12px 8px;
+    font-size: 0.85rem;
+  }
+  .comparison-table td.method-name {
+    font-size: 0.9rem;
+  }
+  .context-stat-num {
+    font-size: 1.6rem;
+  }
   .section {
     padding: 40px 0;
   }
@@ -1812,6 +1839,12 @@ img {
   }
 }
 
+@media (max-width: 640px) {
+  .context-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 480px) {
   .hero-title {
     font-size: 2.25rem;
@@ -1829,15 +1862,13 @@ img {
   .brands-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .context-stats-grid {
-    grid-template-columns: 1fr;
-  }
   .context-card-row {
     flex-direction: column;
     gap: 12px;
+    padding: 16px;
   }
-  .comparison-container {
-    padding: 24px 16px;
+  .context-stat-num {
+    font-size: 1.4rem;
   }
 }
 
