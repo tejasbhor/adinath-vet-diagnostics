@@ -437,31 +437,56 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ==========================================
-  // INITIAL PAGE SETUP & CRM REDIRECT HANDLING
+  // CRM BACKGROUND SUBMISSION & TOAST HANDLING
   // ==========================================
+  let isFormSubmitting = false;
+  const zohoIframe = document.getElementById("zoho_submit_iframe");
 
-  // Set return URL dynamically to current window origin + pathname
-  const returnUrlInput = document.getElementById("returnURL");
-  if (returnUrlInput) {
-    returnUrlInput.value = window.location.origin + window.location.pathname + "?submitted=true";
+  if (quoteForm) {
+    quoteForm.addEventListener("submit", () => {
+      isFormSubmitting = true;
+    });
   }
 
-  // Check URL parameters for successful CRM submit redirect
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get("submitted") === "true") {
-    // Show visual confirmation on the page
-    showFeedback("Thank you! Your sourcing inquiry has been successfully submitted to Zoho CRM. Our diagnostics product manager in Indore will contact you shortly.", "success");
-    
-    // Smooth scroll to the form feedback
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      setTimeout(() => {
-        contactSection.scrollIntoView({ behavior: "smooth" });
-      }, 500);
-    }
-    
-    // Clean query parameters from URL bar
-    window.history.replaceState({}, document.title, window.location.pathname);
+  if (zohoIframe) {
+    zohoIframe.addEventListener("load", () => {
+      if (isFormSubmitting) {
+        // Show success notification on the page!
+        showFeedback("Thank you! Your sourcing inquiry has been successfully submitted to Zoho CRM. Our diagnostics product manager in Indore will contact you shortly.", "success");
+        
+        // Reset the form values
+        if (quoteForm) {
+          quoteForm.reset();
+        }
+
+        // Reset submit button text and disabled state
+        const submitBtn = document.querySelector('.crmWebToEntityForm .formsubmit');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "Submit Technical Sourcing Inquiry";
+        }
+
+        // Reset visible custom select dropdown text
+        if (customSelectTrigger) {
+          const triggerSpan = customSelectTrigger.querySelector("span");
+          if (triggerSpan) {
+            triggerSpan.textContent = "-- Select Product Category --";
+          }
+        }
+        if (customOptions) {
+          customOptions.forEach(opt => opt.classList.remove("selected"));
+        }
+
+        // Smooth scroll to the form feedback
+        const contactSection = document.getElementById("contact");
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Reset the submission flag
+        isFormSubmitting = false;
+      }
+    });
   }
 
   function showFeedback(message, type) {
