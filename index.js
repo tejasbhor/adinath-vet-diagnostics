@@ -254,8 +254,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const value = option.getAttribute("data-value");
         const label = option.textContent;
 
-        // Set value in the hidden native select
-        interestedProductSelect.value = value;
+        // Set value in the hidden native select (robustly handles multi-select multiple attribute)
+        for (let i = 0; i < interestedProductSelect.options.length; i++) {
+          const opt = interestedProductSelect.options[i];
+          if (opt.value === value) {
+            opt.selected = true;
+          } else {
+            opt.selected = false;
+          }
+        }
 
         // Update trigger label
         customSelectTrigger.querySelector("span").textContent = label;
@@ -369,9 +376,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const product = productDatabase.find(p => p.name === productName);
         const zohoCategory = product ? mapCategoryToZoho(product.category) : '';
 
-        // Auto fill form select
-        if (interestedProductSelect) {
-          interestedProductSelect.value = zohoCategory;
+          // Auto fill form select (robustly handles multi-select multiple attribute)
+          for (let i = 0; i < interestedProductSelect.options.length; i++) {
+            const opt = interestedProductSelect.options[i];
+            if (opt.value === zohoCategory) {
+              opt.selected = true;
+            } else {
+              opt.selected = false;
+            }
+          }
           
           // Update visible custom select UI
           if (customSelectTrigger) {
@@ -476,8 +489,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const setupInquireBtn = document.getElementById("setupInquireBtn");
   if (setupInquireBtn) {
     setupInquireBtn.addEventListener("click", () => {
-      if (interestedProductSelect) {
-        interestedProductSelect.value = "PCR"; // Map turnkey lab setup to PCR category in Zoho
+        // Map turnkey lab setup to PCR category in Zoho (robustly handles multi-select multiple attribute)
+        for (let i = 0; i < interestedProductSelect.options.length; i++) {
+          const opt = interestedProductSelect.options[i];
+          if (opt.value === "PCR") {
+            opt.selected = true;
+          } else {
+            opt.selected = false;
+          }
+        }
         
         // Update visible custom select UI
         if (customSelectTrigger) {

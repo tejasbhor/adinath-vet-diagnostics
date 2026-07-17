@@ -639,7 +639,7 @@
           <input type="text" style="display:none;" name="xmIwtLD" value="b3a5b952d0d376a4a2d5808ae6f9cb0fba79d003bb74b4e38f97ca8f1bae447e23bd3d8c7af88ef92af7d79931989f32">
           <input type="text" style="display:none;" name="actionType" value="TGVhZHM=">
           <input type="text" style="display:none;" name="returnURL" value="null">
-          <input type="text" style="display:none;" name="aG9uZXlwb3Q" value="">
+          <input type="text" type="hidden" style="display: none;" name="aG9uZXlwb3Q" value="">
           
           <select style="display:none;" id="Lead_Source" name="Lead Source">
             <option selected value="Website">Website</option>
@@ -696,8 +696,7 @@
               </div>
               
               <!-- Hidden native select for Zoho CRM submit logic -->
-              <select id="LEADCF5" name="LEADCF5" style="display: none;" required aria-required="true" aria-label="LEADCF5">
-                <option value="">-- Select Product Category --</option>
+              <select id="LEADCF5" name="LEADCF5" style="display: none;" required aria-required="true" aria-label="LEADCF5" multiple>
                 <option value="Accessories">Accessories</option>
                 <option value="AGID Test Kit">AGID Test Kit</option>
                 <option value="Conjugate">Conjugate</option>
