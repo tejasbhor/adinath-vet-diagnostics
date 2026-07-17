@@ -624,9 +624,9 @@
           <span id="wf_splash_info"></span>
         </div>
 
-        <h3 class="form-title">Submit Technical or Sales Inquiry</h3>
+        <h3 class="form-title">Request a Quote</h3>
         <p class="form-desc">
-          Specify your targeted disease diagnostic kits, lab setup needs, or equipment pricing queries.
+          Please fill out the form below, and our team will get back to you shortly.
         </p>
 
         <form class="contact-form crmWebToEntityForm" id="webform1294520000001616627" action="https://crm.zoho.in/crm/WebToLeadForm" name="WebToLeads1294520000001616627" method="POST" onSubmit='javascript:document.charset="UTF-8"; return checkMandatory1294520000001616627()' accept-charset="UTF-8">
@@ -719,7 +719,7 @@
           <div class="form-group" style="flex-direction: row; align-items: flex-start; gap: 10px; margin-top: 5px;">
             <input type="checkbox" id="formConsentCheck" required style="width: auto; margin-top: 4px;">
             <label for="formConsentCheck" style="font-weight: 500; font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.4;">
-              I consent to Adinath Veterinary Products Pvt. Ltd. storing and processing my professional contact details to respond to this diagnostic sourcing inquiry, in accordance with the <a href="#" id="privacyFormLink" style="color: var(--color-secondary); text-decoration: underline;">Privacy Policy</a>. *
+              I agree to the storing and processing of my contact details in accordance with the <a href="#" id="privacyFormLink" style="color: var(--color-secondary); text-decoration: underline;">Privacy Policy</a>. *
             </label>
           </div>
 
@@ -727,7 +727,7 @@
           <div class="form-feedback" id="formFeedback"></div>
 
           <button type="submit" id="formsubmit" class="btn btn-primary formsubmit" style="align-self: flex-start; min-width: 180px;">
-            Submit Technical Sourcing Inquiry
+            Submit Inquiry
           </button>
         </form>
       </div>
@@ -1086,7 +1086,7 @@
       var submitBtn = document.querySelector('.crmWebToEntityForm .formsubmit');
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Submitting to CRM...';
+        submitBtn.innerHTML = 'Submitting...';
       }
       return true;
     }
@@ -1127,7 +1127,9 @@
                   reloadImg1294520000001616627();
                 }
                 var splashinfodom = document.getElementById('wf_splash_info');
-                if (splashinfodom) splashinfodom.innerText = data.actionvalue;
+                if (splashinfodom) {
+                  splashinfodom.innerText = "Thank you! Your inquiry has been submitted successfully.";
+                }
                 var splashdom = document.getElementById('wf_splash');
                 if(splashdom) {
                   // Trigger form reset event (handles resetting form inputs and our custom select dropdown)
@@ -1193,14 +1195,14 @@
           let formDom = document.querySelector('.crmWebToEntityForm .formsubmit');
           if (formDom) {
             formDom.removeAttribute('disabled');
-            formDom.innerHTML = 'Submit Technical Sourcing Inquiry';
+            formDom.innerHTML = 'Submit Inquiry';
           }
         }).catch (error => {
           alert('An error occurred during submission.');
           let formDom = document.querySelector('.crmWebToEntityForm .formsubmit');
           if (formDom) {
             formDom.removeAttribute('disabled');
-            formDom.innerHTML = 'Submit Technical Sourcing Inquiry';
+            formDom.innerHTML = 'Submit Inquiry';
           }
         });
       }
