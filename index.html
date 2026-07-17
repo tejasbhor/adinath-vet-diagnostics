@@ -8,6 +8,24 @@
   <meta name="author" content="Adinath Veterinary Products Pvt. Ltd.">
   <title>Adinath Veterinary Products Pvt. Ltd. | B2B Animal Disease Diagnostic Kits & Turnkey Labs</title>
   
+  <!-- Favicon -->
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+
+  <!-- Open Graph / Facebook Social Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://adinathvet.com/">
+  <meta property="og:title" content="Adinath Veterinary Products Pvt. Ltd. | B2B Animal Disease Diagnostic Kits & Turnkey Labs">
+  <meta property="og:description" content="India's leading B2B distributor of veterinary diagnostics, supplying PCR, ELISA, and Rapid kits from Thermo Fisher Scientific, Biostone, Ingenasa, VMRD, and building turnkey veterinary labs.">
+  <meta property="og:image" content="assets/social-preview.jpg">
+
+  <!-- Twitter Social Preview -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://adinathvet.com/">
+  <meta name="twitter:title" content="Adinath Veterinary Products Pvt. Ltd. | B2B Animal Disease Diagnostic Kits & Turnkey Labs">
+  <meta name="twitter:description" content="India's leading B2B distributor of veterinary diagnostics, supplying PCR, ELISA, and Rapid kits from Thermo Fisher Scientific, Biostone, Ingenasa, VMRD, and building turnkey veterinary labs.">
+  <meta name="twitter:image" content="assets/social-preview.jpg">
+
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="index.css">
 </head>
@@ -603,39 +621,90 @@
           Specify your targeted disease diagnostic kits, lab setup needs, or equipment pricing queries.
         </p>
 
-        <form class="contact-form" id="quoteForm">
+        <form class="contact-form crmWebToEntityForm" id="quoteForm" action="https://crm.zoho.in/crm/WebToLeadForm" name="WebToLeads1294520000001616627" method="POST" onSubmit='javascript:document.charset="UTF-8"; return checkMandatory1294520000001616627()' accept-charset="UTF-8">
+          <!-- Zoho CRM Hidden Fields -->
+          <input type="text" style="display:none;" name="xnQsjsdp" value="44193ff5c85543c1a6513735a9689f0cdd780c759668773e20df6d3c67e2c4c5">
+          <input type="hidden" name="zc_gad" id="zc_gad" value="">
+          <input type="text" style="display:none;" name="xmIwtLD" value="8ea1c54b061fabaead5a4e828f4c6136f63ce516e8b7bf0e100eb2f69958fe69b5ae4805a57649a512e7fe7852d530d3">
+          <input type="text" style="display:none;" name="actionType" value="TGVhZHM=">
+          <input type="text" style="display:none;" name="returnURL" id="returnURL" value="null">
+          <input type="text" style="display:none;" name="aG9uZXlwb3Q" value="">
+          
+          <select style="display:none;" id="Lead_Source" name="Lead Source">
+            <option selected value="Website">Website</option>
+          </select>
+
+          <!-- Form Fields -->
           <div class="form-row">
             <div class="form-group">
-              <label for="clientName">Your Name *</label>
-              <input type="text" id="clientName" placeholder="e.g. Dr. Ramesh Kumar" required>
+              <label for="First_Name">First Name</label>
+              <input type="text" id="First_Name" name="First Name" placeholder="e.g. Ramesh" aria-required="false" aria-label="First Name" aria-valuemax="40" maxlength="40">
             </div>
             <div class="form-group">
-              <label for="companyName">Institute / Firm Name *</label>
-              <input type="text" id="companyName" placeholder="e.g. State Diagnostic Lab, Indore" required>
+              <label for="Last_Name">Last Name *</label>
+              <input type="text" id="Last_Name" name="Last Name" placeholder="e.g. Kumar" required aria-required="true" aria-label="Last Name" aria-valuemax="80" maxlength="80">
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="clientPhone">Phone Number *</label>
-              <input type="tel" id="clientPhone" placeholder="e.g. 9876543210" required>
+              <label for="Company">Institute / Firm Name *</label>
+              <input type="text" id="Company" name="Company" placeholder="e.g. State Diagnostic Lab, Indore" required aria-required="true" aria-label="Company" aria-valuemax="200" maxlength="200">
             </div>
             <div class="form-group">
-              <label for="clientEmail">Email Address *</label>
-              <input type="email" id="clientEmail" placeholder="e.g. contact@lab.org" required>
+              <label for="Phone">Phone Number *</label>
+              <input type="text" id="Phone" name="Phone" placeholder="e.g. 9876543210" required aria-required="true" aria-label="Phone" aria-valuemax="30" maxlength="30">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="Email">Email Address *</label>
+              <input type="text" ftype="email" id="Email" name="Email" placeholder="e.g. contact@lab.org" required aria-required="true" aria-label="Email" aria-valuemax="100" maxlength="100">
+            </div>
+            <div class="form-group">
+              <label for="LEADCF5">Product of Interest *</label>
+              <div class="custom-select-wrapper" id="customProductSelectWrapper">
+                <div class="custom-select-trigger" id="customProductSelectTrigger">
+                  <span>-- Select Product Category --</span>
+                  <svg class="chevron-down" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="custom-options" id="customProductOptions">
+                  <div class="custom-option" data-value="Accessories">Accessories</div>
+                  <div class="custom-option" data-value="AGID Test Kit">AGID Test Kit</div>
+                  <div class="custom-option" data-value="Conjugate">Conjugate</div>
+                  <div class="custom-option" data-value="Control">Control</div>
+                  <div class="custom-option" data-value="ELISA">ELISA</div>
+                  <div class="custom-option" data-value="Monoclonal Antibody">Monoclonal Antibody</div>
+                  <div class="custom-option" data-value="One Step ELISA">One Step ELISA</div>
+                  <div class="custom-option" data-value="PCR">PCR</div>
+                  <div class="custom-option" data-value="Rapid">Rapid</div>
+                  <div class="custom-option" data-value="Reagent">Reagent</div>
+                  <div class="custom-option" data-value="Wash Solution">Wash Solution</div>
+                </div>
+              </div>
+              
+              <!-- Hidden native select for Zoho CRM submit logic -->
+              <select id="LEADCF5" name="LEADCF5" style="display: none;" required aria-required="true" aria-label="LEADCF5">
+                <option value="">-- Select Product Category --</option>
+                <option value="Accessories">Accessories</option>
+                <option value="AGID Test Kit">AGID Test Kit</option>
+                <option value="Conjugate">Conjugate</option>
+                <option value="Control">Control</option>
+                <option value="ELISA">ELISA</option>
+                <option value="Monoclonal Antibody">Monoclonal Antibody</option>
+                <option value="One Step ELISA">One Step ELISA</option>
+                <option value="PCR">PCR</option>
+                <option value="Rapid">Rapid</option>
+                <option value="Reagent">Reagent</option>
+                <option value="Wash Solution">Wash Solution</option>
+              </select>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="interestedProduct">Select Product of Interest</label>
-            <select id="interestedProduct">
-              <!-- Dynamically populated by JS -->
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="comments">Inquiry / Requirements Description *</label>
-            <textarea id="comments" placeholder="Describe assay throughput, regulatory approvals required, target species or timeframe..." required></textarea>
+            <label for="Description">Inquiry / Requirements Description *</label>
+            <textarea id="Description" name="Description" placeholder="Describe assay throughput, regulatory approvals required, target species or timeframe..." required aria-required="false" aria-label="Description" aria-multiline="true" style="font-family: Arial, sans-serif;"></textarea>
           </div>
 
           <!-- B2B Data Consent Checkbox -->
@@ -649,7 +718,7 @@
           <!-- Alert for Feedback message -->
           <div class="form-feedback" id="formFeedback"></div>
 
-          <button type="submit" class="btn btn-primary" style="align-self: flex-start; min-width: 180px;">
+          <button type="submit" id="formsubmit" class="btn btn-primary formsubmit" style="align-self: flex-start; min-width: 180px;">
             Submit Technical Sourcing Inquiry
           </button>
         </form>
@@ -921,6 +990,120 @@
       </div>
     </div>
   </div>
+
+  <!-- Zoho CRM Web-to-Lead Validation Scripts -->
+  <script>
+    function addAriaSelected1294520000001616627(){
+      var optionElem = event.target;
+      var previousSelectedOption = optionElem.querySelector('[aria-selected=true]');
+      if (previousSelectedOption) {
+        previousSelectedOption.removeAttribute('aria-selected');
+      }
+      optionElem.querySelectorAll('option') [optionElem.selectedIndex] .ariaSelected = 'true';
+    }
+    function validateEmail1294520000001616627(){
+      var form = document.forms['WebToLeads1294520000001616627'];
+      var emailFld = form.querySelectorAll('[ftype=email]');
+      var i;
+      for(i = 0; i < emailFld.length; i++ ) {
+        var emailVal = emailFld[i].value;
+        if ((emailVal.replace (/^\s+|\s+$/g,'') ) .length != 0) {
+          var atpos = emailVal.indexOf('@');
+          var dotpos = emailVal.lastIndexOf('.');
+          if(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length) {
+            alert('Please enter a valid email address.');
+            emailFld[i].focus();
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+    function checkMandatory1294520000001616627(isAjax){
+      var mndFileds = new Array('Company', 'Last Name', 'Email', 'Phone', 'LEADCF5');
+      var fldLangVal = new Array('Company', 'Last Name', 'Email', 'Phone', 'Product of Interest');
+      for (i = 0; i < mndFileds.length; i++ ) {
+        var fieldObj = document.forms['WebToLeads1294520000001616627'] [mndFileds[i]];
+        if (fieldObj) {
+          if(((fieldObj.value) .replace (/^\s+|\s+$/g,'') ) .length == 0) {
+            if (fieldObj.type == 'file') {
+              alert('Please select a file to upload.');
+              fieldObj.focus();
+              return false;
+            }
+            alert(fldLangVal[i] + ' cannot be empty.');
+            fieldObj.focus();
+            return false;
+          } else if (fieldObj.nodeName == 'SELECT') {
+            if (fieldObj.options[fieldObj.selectedIndex].value == '-None-' || fieldObj.options[fieldObj.selectedIndex].value == '') {
+              alert(fldLangVal[i] + ' cannot be empty.');
+              fieldObj.focus();
+              return false;
+            }
+          } else if (fieldObj.type == 'checkbox') {
+            if (fieldObj.checked == false) {
+              alert('Please accept ' + fldLangVal[i]);
+              fieldObj.focus();
+              return false;
+            }
+          }
+          try{
+            if (fieldObj.name == 'Last Name') {
+              name = fieldObj.value;
+            }
+          } catch (e){}
+        }
+      }
+      if ( !validateEmail1294520000001616627 () ) {
+        return false;
+      }
+      var urlparams = new URLSearchParams(window.location.search);
+      if (urlparams.has ('service') && (urlparams.get ('service') === 'smarturl') ) {
+        var webform = document.getElementById('webform1294520000001616627');
+        var service = urlparams.get('service');
+        var smarturlfield = document.createElement('input');
+        smarturlfield.setAttribute('type', 'hidden');
+        smarturlfield.setAttribute('value', service);
+        smarturlfield.setAttribute('name', 'service');
+        webform.appendChild(smarturlfield);
+      }
+      var consentCheck = document.getElementById('formConsentCheck');
+      if (consentCheck && !consentCheck.checked) {
+        alert('Please consent to our Privacy Policy to submit your inquiry.');
+        consentCheck.focus();
+        return false;
+      }
+      
+      // Visual indicator for form submission
+      var submitBtn = document.querySelector('.crmWebToEntityForm .formsubmit');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Submitting to CRM...';
+      }
+      return true;
+    }
+    _wFa_ajax_will_be_replaced = false;
+    if (typeof _wfa_fstprtcken == 'undefined') {
+      _wfa_fstprtcken = {};
+    }
+    _wfa_fstprtcken[1294520000001616627] = true;
+    function tooltipShow1294520000001616627(el){
+      var tooltip = el.nextElementSibling;
+      var tooltipDisplay = tooltip.style.display;
+      if (tooltipDisplay == 'none') {
+        var allTooltip = document.getElementsByClassName('zcwf_tooltip_over');
+        for (i = 0; i < allTooltip.length; i++ ) {
+          allTooltip[i].style.display = 'none';
+        }
+        tooltip.style.display = 'block';
+      } else {
+        tooltip.style.display = 'none';
+      }
+    }
+  </script>
+  <!-- Do not remove this --- Analytics Tracking code starts -->
+  <script id="wf_anal" src="https://crm.zohopublic.in/crm/WebFormAnalyticsServeServlet?rid=9c5ba726fe5d256f2d9ecb5d21e2e30106831ec572688b7fd823df7e2593c943f5a7d4914faecdb2a60067da53651c36gid1049010b5e03e806a06f3c2be6b0d852d7ce6f0173967e051c0b4d9e61f732acgid0af4c2f43efaaf6b1c79f3827219075b652dcf8bf5cf9f49ecb73eee29f6a84fgida8cd0cb8abb754deff25960b9d03347385435e6f08b1ab1a3f6cde9cd69885cc&tw=c1e0fc4b7f23d30cb26557e09759c1e638767eb712ad44b0fcd102afb01ec671&version=v2"></script>
+  <!-- Do not remove this --- Analytics Tracking code ends. -->
 
   <!-- Interactive Logic JS -->
   <script src="index.js"></script>

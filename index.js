@@ -201,8 +201,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const productsGrid = document.getElementById("productsGrid");
   const catalogEmpty = document.getElementById("catalogEmpty");
 
-  const quoteForm = document.getElementById("quoteForm");
-  const interestedProductSelect = document.getElementById("interestedProduct");
+  const quoteForm = document.getElementById("webform1294520000001616627");
+  const interestedProductSelect = document.getElementById("LEADCF5");
+  const customSelectWrapper = document.getElementById("customProductSelectWrapper");
+  const customSelectTrigger = document.getElementById("customProductSelectTrigger");
+  const customOptions = document.querySelectorAll(".custom-option");
   const formFeedback = document.getElementById("formFeedback");
 
   // ==========================================
@@ -237,45 +240,37 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ==========================================
-  // INITIALIZE INQUIRY SELECT DROPDOWN
+  // CUSTOM SELECT DROPDOWN LOGIC
   // ==========================================
-  function populateProductDropdown() {
-    if (!interestedProductSelect) return;
-    
-    // Clear and add placeholder
-    interestedProductSelect.innerHTML = '<option value="">-- Select Product or Service --</option>';
-    
-    // Group by category for neat drop-downs
-    const categories = {
-      rapid: "Rapid Diagnostic Kits",
-      elisa: "ELISA Diagnostic Kits",
-      pcr: "PCR Diagnostic Kits",
-      equipment: "Laboratory Instruments & Setup"
-    };
-
-    Object.keys(categories).forEach(cat => {
-      const optGroup = document.createElement("optgroup");
-      optGroup.label = categories[cat];
-      
-      const catProducts = productDatabase.filter(p => p.category === cat);
-      catProducts.forEach(p => {
-        const option = document.createElement("option");
-        option.value = p.name;
-        option.textContent = `${p.name} (${p.brand})`;
-        optGroup.appendChild(option);
-      });
-
-      interestedProductSelect.appendChild(optGroup);
+  if (customSelectTrigger && customSelectWrapper && interestedProductSelect) {
+    customSelectTrigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      customSelectWrapper.classList.toggle("open");
     });
 
-    // Add Lab Setup Turnkey Option
-    const servicesGroup = document.createElement("optgroup");
-    servicesGroup.label = "Turnkey Diagnostic Services";
-    const option = document.createElement("option");
-    option.value = "Turnkey Diagnostic Laboratory Setup";
-    option.textContent = "Full Laboratory Setup & Sourcing (Thermo Fisher)";
-    servicesGroup.appendChild(option);
-    interestedProductSelect.appendChild(servicesGroup);
+    customOptions.forEach(option => {
+      option.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const value = option.getAttribute("data-value");
+        const label = option.textContent;
+
+        // Set value in the hidden native select
+        interestedProductSelect.value = value;
+
+        // Update trigger label
+        customSelectTrigger.querySelector("span").textContent = label;
+        customSelectWrapper.classList.remove("open");
+
+        // Update selected class list
+        customOptions.forEach(opt => opt.classList.remove("selected"));
+        option.classList.add("selected");
+      });
+    });
+
+    // Close options list if user clicks outside of select dropdown
+    document.addEventListener("click", () => {
+      customSelectWrapper.classList.remove("open");
+    });
   }
 
   // ==========================================
@@ -352,6 +347,17 @@ document.addEventListener("DOMContentLoaded", () => {
     attachInquiryButtonEvents();
   }
 
+  // Category mapping function from website database to Zoho CRM picklist
+  function mapCategoryToZoho(category) {
+    const mapping = {
+      'rapid': 'Rapid',
+      'elisa': 'ELISA',
+      'pcr': 'PCR',
+      'equipment': 'PCR'
+    };
+    return mapping[category] || '';
+  }
+
   // Attach dynamic click events to "Inquire" buttons
   function attachInquiryButtonEvents() {
     const inquireBtns = document.querySelectorAll(".product-inquire-btn");
@@ -359,15 +365,36 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.addEventListener("click", (e) => {
         const productName = e.target.getAttribute("data-product-name");
         
+        // Find product in database to get category for Zoho picklist mapping
+        const product = productDatabase.find(p => p.name === productName);
+        const zohoCategory = product ? mapCategoryToZoho(product.category) : '';
+
         // Auto fill form select
         if (interestedProductSelect) {
-          interestedProductSelect.value = productName;
+          interestedProductSelect.value = zohoCategory;
+          
+          // Update visible custom select UI
+          if (customSelectTrigger) {
+            const triggerSpan = customSelectTrigger.querySelector("span");
+            if (triggerSpan) {
+              triggerSpan.textContent = zohoCategory || "-- Select Product Category --";
+            }
+          }
+          if (customOptions) {
+            customOptions.forEach(opt => {
+              if (opt.getAttribute("data-value") === zohoCategory) {
+                opt.classList.add("selected");
+              } else {
+                opt.classList.remove("selected");
+              }
+            });
+          }
         }
 
         // Add context to comments
-        const commentsTextarea = document.getElementById("comments");
+        const commentsTextarea = document.getElementById("Description");
         if (commentsTextarea) {
-          commentsTextarea.value = `I would like to request technical specifications, pricing, and availability details for the product: ${productName}.`;
+          commentsTextarea.value = `I would like to request technical specifications, pricing, and availability details for the product: ${productName}${product ? ' (' + product.brand + ')' : ''}.`;
         }
 
         // Smooth scroll to contact form section
@@ -410,46 +437,31 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ==========================================
-  // INQUIRY FORM SUBMISSION HANDLING (B2B Leads)
+  // INITIAL PAGE SETUP & CRM REDIRECT HANDLING
   // ==========================================
-  if (quoteForm) {
-    quoteForm.addEventListener("submit", (e) => {
-      e.preventDefault();
 
-      const name = document.getElementById("clientName").value.trim();
-      const company = document.getElementById("companyName").value.trim();
-      const phone = document.getElementById("clientPhone").value.trim();
-      const email = document.getElementById("clientEmail").value.trim();
-      const product = interestedProductSelect ? interestedProductSelect.value : "";
-      
-      // Basic input validation
-      if (!name || !company || !phone || !email) {
-        showFeedback("Please fill in all required fields.", "error");
-        return;
-      }
+  // Set return URL dynamically to current window origin + pathname
+  const returnUrlInput = document.getElementById("returnURL");
+  if (returnUrlInput) {
+    returnUrlInput.value = window.location.origin + window.location.pathname + "?submitted=true";
+  }
 
-      // Submit Button Loading state
-      const submitBtn = quoteForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `
-        <svg class="animate-spin" style="width: 18px; height: 18px; stroke: white; fill: none; margin-right: 8px; display: inline;" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" style="opacity: 0.25;"></circle>
-          <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" style="opacity: 0.75;"></path>
-        </svg> Processing Inquiry...
-      `;
-
-      // Simulate network request to distributor portal
+  // Check URL parameters for successful CRM submit redirect
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("submitted") === "true") {
+    // Show visual confirmation on the page
+    showFeedback("Thank you! Your sourcing inquiry has been successfully submitted to Zoho CRM. Our diagnostics product manager in Indore will contact you shortly.", "success");
+    
+    // Smooth scroll to the form feedback
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
       setTimeout(() => {
-        // Reset state
-        quoteForm.reset();
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-        
-        // Show success visual modal or feedback
-        showFeedback(`Thank you, ${name}! Your inquiry regarding "${product || 'General Services'}" has been successfully logged. Our clinical product manager in Indore will contact you at ${phone} or ${email} within 2 business hours.`, "success");
-      }, 1500);
-    });
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }, 500);
+    }
+    
+    // Clean query parameters from URL bar
+    window.history.replaceState({}, document.title, window.location.pathname);
   }
 
   function showFeedback(message, type) {
@@ -467,10 +479,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ==========================================
-  // INITIAL PAGE SETUP
-  // ==========================================
-  populateProductDropdown();
+  // Render initial product catalog
   renderProducts();
 
   // Handle turnkey button scroll
@@ -478,10 +487,27 @@ document.addEventListener("DOMContentLoaded", () => {
   if (setupInquireBtn) {
     setupInquireBtn.addEventListener("click", () => {
       if (interestedProductSelect) {
-        interestedProductSelect.value = "Turnkey Diagnostic Laboratory Setup";
+        interestedProductSelect.value = "PCR"; // Map turnkey lab setup to PCR category in Zoho
+        
+        // Update visible custom select UI
+        if (customSelectTrigger) {
+          const triggerSpan = customSelectTrigger.querySelector("span");
+          if (triggerSpan) {
+            triggerSpan.textContent = "PCR";
+          }
+        }
+        if (customOptions) {
+          customOptions.forEach(opt => {
+            if (opt.getAttribute("data-value") === "PCR") {
+              opt.classList.add("selected");
+            } else {
+              opt.classList.remove("selected");
+            }
+          });
+        }
       }
       
-      const commentsTextarea = document.getElementById("comments");
+      const commentsTextarea = document.getElementById("Description");
       if (commentsTextarea) {
         commentsTextarea.value = "I am interested in setting up a turnkey veterinary diagnostic laboratory. Please provide details regarding Thermo Fisher Scientific equipment integration and space design consulting.";
       }
