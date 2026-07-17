@@ -251,26 +251,31 @@ document.addEventListener("DOMContentLoaded", () => {
     customOptions.forEach(option => {
       option.addEventListener("click", (e) => {
         e.stopPropagation();
-        const value = option.getAttribute("data-value");
-        const label = option.textContent;
+        
+        // Toggle selected class on visual option
+        option.classList.toggle("selected");
 
-        // Set value in the hidden native select (robustly handles multi-select multiple attribute)
+        // Collect selected options
+        const selectedOptions = Array.from(customOptions).filter(opt => opt.classList.contains("selected"));
+        const selectedValues = selectedOptions.map(opt => opt.getAttribute("data-value"));
+        const selectedLabels = selectedOptions.map(opt => opt.textContent.trim());
+
+        // Set multiple selected attributes in hidden native select
         for (let i = 0; i < interestedProductSelect.options.length; i++) {
           const opt = interestedProductSelect.options[i];
-          if (opt.value === value) {
+          if (selectedValues.includes(opt.value)) {
             opt.selected = true;
           } else {
             opt.selected = false;
           }
         }
 
-        // Update trigger label
-        customSelectTrigger.querySelector("span").textContent = label;
-        customSelectWrapper.classList.remove("open");
-
-        // Update selected class list
-        customOptions.forEach(opt => opt.classList.remove("selected"));
-        option.classList.add("selected");
+        // Update visible trigger span text
+        if (selectedLabels.length > 0) {
+          customSelectTrigger.querySelector("span").textContent = selectedLabels.join(", ");
+        } else {
+          customSelectTrigger.querySelector("span").textContent = "-- Select Product Category --";
+        }
       });
     });
 

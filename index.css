@@ -2290,6 +2290,21 @@ input:checked + .toggle-slider:before {
   color: var(--color-text-main);
   font-size: 0.95rem;
   text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-option::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  flex-shrink: 0;
+  transition: var(--transition-fast);
+  background-color: var(--color-white);
 }
 
 .custom-option:hover {
@@ -2298,9 +2313,18 @@ input:checked + .toggle-slider:before {
 }
 
 .custom-option.selected {
-  background-color: var(--color-secondary);
-  color: var(--color-white);
+  background-color: var(--color-accent-light);
+  color: var(--color-secondary);
   font-weight: 600;
+}
+
+.custom-option.selected::before {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-size: 10px 10px;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* ==========================================
