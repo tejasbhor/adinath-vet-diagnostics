@@ -1121,6 +1121,7 @@
           const contentType = response.headers.get('Content-Type');
           return contentType.includes('application/json') ? response.json() : response.text();
         }).then(data => {
+          console.log('[ZOHO DEBUG] Full response:', JSON.stringify(data));
           if(typeof data === 'object') {
             if(data.actionsubmit === 'Splash Message') {
               if(data.invalidCaptcha && data.invalidCaptcha == 'true') {
