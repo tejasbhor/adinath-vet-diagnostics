@@ -381,7 +381,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const product = productDatabase.find(p => p.name === productName);
         const zohoCategory = product ? mapCategoryToZoho(product.category) : '';
 
-          // Auto fill form select (robustly handles multi-select multiple attribute)
+        // Auto fill form select (robustly handles multi-select multiple attribute)
+        if (interestedProductSelect) {
           for (let i = 0; i < interestedProductSelect.options.length; i++) {
             const opt = interestedProductSelect.options[i];
             if (opt.value === zohoCategory) {
@@ -494,6 +495,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const setupInquireBtn = document.getElementById("setupInquireBtn");
   if (setupInquireBtn) {
     setupInquireBtn.addEventListener("click", () => {
+      if (interestedProductSelect) {
         // Map turnkey lab setup to PCR category in Zoho (robustly handles multi-select multiple attribute)
         for (let i = 0; i < interestedProductSelect.options.length; i++) {
           const opt = interestedProductSelect.options[i];
