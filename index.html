@@ -615,19 +615,27 @@
   <section id="contact" class="section section-bg">
     <div class="container contact-grid">
       <!-- Contact Form Wrapper -->
-      <div class="form-wrapper">
+      <div class="form-wrapper" style="position: relative;">
+        <!-- Zoho CRM Custom Splash Message Box -->
+        <div class="wf_customMessageBox" id="wf_splash" style="display:none">
+          <div class="wf_customCircle">
+            <div class="wf_customCheckMark"></div>
+          </div>
+          <span id="wf_splash_info"></span>
+        </div>
+
         <h3 class="form-title">Submit Technical or Sales Inquiry</h3>
         <p class="form-desc">
           Specify your targeted disease diagnostic kits, lab setup needs, or equipment pricing queries.
         </p>
 
-        <form class="contact-form crmWebToEntityForm" id="webform1294520000001616627" action="https://crm.zoho.in/crm/WebToLeadForm" name="WebToLeads1294520000001616627" method="POST" onSubmit='javascript:document.charset="UTF-8"; return checkMandatory1294520000001616627()' accept-charset="UTF-8" target="zoho_submit_iframe">
+        <form class="contact-form crmWebToEntityForm" id="webform1294520000001616627" action="https://crm.zoho.in/crm/WebToLeadForm" name="WebToLeads1294520000001616627" method="POST" onSubmit='javascript:document.charset="UTF-8"; return checkMandatory1294520000001616627()' accept-charset="UTF-8">
           <!-- Zoho CRM Hidden Fields -->
-          <input type="text" style="display:none;" name="xnQsjsdp" value="44193ff5c85543c1a6513735a9689f0cdd780c759668773e20df6d3c67e2c4c5">
+          <input type="text" style="display:none;" name="xnQsjsdp" value="05437321020214ef552d28d139e8ab64bd17b2cc513de57279d32f4d75f57d69">
           <input type="hidden" name="zc_gad" id="zc_gad" value="">
-          <input type="text" style="display:none;" name="xmIwtLD" value="8ea1c54b061fabaead5a4e828f4c6136f63ce516e8b7bf0e100eb2f69958fe69b5ae4805a57649a512e7fe7852d530d3">
+          <input type="text" style="display:none;" name="xmIwtLD" value="b3a5b952d0d376a4a2d5808ae6f9cb0fba79d003bb74b4e38f97ca8f1bae447e23bd3d8c7af88ef92af7d79931989f32">
           <input type="text" style="display:none;" name="actionType" value="TGVhZHM=">
-          <input type="text" style="display:none;" name="returnURL" id="returnURL" value="null">
+          <input type="text" style="display:none;" name="returnURL" value="null">
           <input type="text" style="display:none;" name="aG9uZXlwb3Q" value="">
           
           <select style="display:none;" id="Lead_Source" name="Lead Source">
@@ -722,8 +730,6 @@
             Submit Technical Sourcing Inquiry
           </button>
         </form>
-        <!-- Hidden iframe for background submission to Zoho CRM -->
-        <iframe name="zoho_submit_iframe" id="zoho_submit_iframe" style="display: none;"></iframe>
       </div>
 
       <!-- Contact Details & Map Column -->
@@ -993,7 +999,7 @@
     </div>
   </div>
 
-  <!-- Zoho CRM Web-to-Lead Validation Scripts -->
+  <!-- Zoho CRM Web-to-Lead Validation & Fetch-Submission Scripts -->
   <script>
     function addAriaSelected1294520000001616627(){
       var optionElem = event.target;
@@ -1084,7 +1090,121 @@
       }
       return true;
     }
-    _wFa_ajax_will_be_replaced = false;
+    function captchaFailedHandling1294520000001616627(message){
+      var capErr = document.getElementById('captchaErr1294520000001616627');
+      if (capErr) {
+        capErr.innerHTML = message;
+        capErr.style.visibility = 'visible';
+      }
+      var capFld = document.getElementById('captchaField1294520000001616627');
+      if (capFld) capFld.focus();
+      setTimeout(function(){
+        if (capErr) capErr.style.visibility = 'hidden';
+      }, 5000);
+    }
+    document.getElementById('webform1294520000001616627').addEventListener('submit', function(e){
+      var ismandatory = checkMandatory1294520000001616627(true);
+      e.preventDefault();
+      if(ismandatory === undefined || ismandatory) {
+        if(typeof _wfa_track !== 'undefined' && _wfa_track.wfa_submit) {
+          _wfa_track.wfa_submit(e);
+        }
+        var formData = new FormData(this);
+        fetch('https://crm.zoho.in/crm/WebToLeadForm', {
+          method: 'POST',
+          body: formData,
+          cache: 'no-cache'
+        }).then(response => {
+          const contentType = response.headers.get('Content-Type');
+          return contentType.includes('application/json') ? response.json() : response.text();
+        }).then(data => {
+          if(typeof data === 'object') {
+            if(data.actionsubmit === 'Splash Message') {
+              if(data.invalidCaptcha && data.invalidCaptcha == 'true') {
+                captchaFailedHandling1294520000001616627(data.actionvalue);
+              } else {
+                if (typeof reloadImg1294520000001616627 !== 'undefined') {
+                  reloadImg1294520000001616627();
+                }
+                var splashinfodom = document.getElementById('wf_splash_info');
+                if (splashinfodom) splashinfodom.innerText = data.actionvalue;
+                var splashdom = document.getElementById('wf_splash');
+                if(splashdom) {
+                  // Trigger form reset event (handles resetting form inputs and our custom select dropdown)
+                  document.getElementById('webform1294520000001616627').reset();
+                  splashdom.style.display = '';
+                  
+                  // Smooth scroll to the splash message popup
+                  const contactSection = document.getElementById("contact");
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: "smooth" });
+                  }
+
+                  setTimeout(function(){
+                    splashdom.style.display = 'none';
+                  }, 10000);
+                }
+                if(typeof _wfa_track != 'undefined' && _wfa_track.wfa_post_submit) {
+                  _wfa_track.wfa_post_submit(e);
+                }
+              }
+            } else if(data.actionsubmit === 'redirect_url' || data.actionsubmit === 'parent_redirect') {
+              if(data.success) {
+                if(typeof _wfa_track !== 'undefined' && _wfa_track.wfa_post_submit) {
+                  _wfa_track.wfa_post_submit(e);
+                }
+                if (typeof historyBack1294520000001616627 !== 'undefined') {
+                  window.addEventListener('focus', historyBack1294520000001616627);
+                }
+              }
+              if(data.actionsubmit === 'redirect_url') {
+                window.location.assign(data.redirectUrl);
+              } else if(data.actionsubmit === 'parent_redirect') {
+                parent.window.location = data.redirectUrl;
+              }
+            } else if(data.actionsubmit === 'parent_redirect') {
+              parent.window.location = data.redirectUrl;
+            } else if(data.actionsubmit === 'add_hash') {
+              document.location.hash = data.hash;
+            } else if(data.actionsubmit === 'error_msg') {
+              alert(data.message);
+            } else if(data.invalidCaptcha && data.invalidCaptcha === 'true') {
+              captchaFailedHandling1294520000001616627(data.actionvalue);
+              if(data.extraAction === 'parent_signal') {
+                window.parent.postMessage('checkCaptchaError', '*');
+              }
+            } else if(data.actionsubmit === 'captcha_error') {
+              alert(data.message);
+              if(data.extraAction === 'parent_signal') {
+                window.parent.postMessage('checkCaptchaError', '*');
+              }
+            } else if(data.actionsubmit === 'thankyou_page') {
+              if(typeof _wfa_track !== 'undefined' && _wfa_track.wfa_post_submit) {
+                _wfa_track.wfa_post_submit(e);
+                if (typeof historyBack1294520000001616627 !== 'undefined') {
+                  window.addEventListener('focus', historyBack1294520000001616627);
+                }
+              }
+              window.location.assign(data.redirectUrl);
+            }
+          } else {
+            document.write(data);
+          }
+          let formDom = document.querySelector('.crmWebToEntityForm .formsubmit');
+          if (formDom) {
+            formDom.removeAttribute('disabled');
+            formDom.innerHTML = 'Submit Technical Sourcing Inquiry';
+          }
+        }).catch (error => {
+          alert('An error occurred during submission.');
+          let formDom = document.querySelector('.crmWebToEntityForm .formsubmit');
+          if (formDom) {
+            formDom.removeAttribute('disabled');
+            formDom.innerHTML = 'Submit Technical Sourcing Inquiry';
+          }
+        });
+      }
+    });
     if (typeof _wfa_fstprtcken == 'undefined') {
       _wfa_fstprtcken = {};
     }
@@ -1104,7 +1224,7 @@
     }
   </script>
   <!-- Do not remove this --- Analytics Tracking code starts -->
-  <script id="wf_anal" src="https://crm.zohopublic.in/crm/WebFormAnalyticsServeServlet?rid=9c5ba726fe5d256f2d9ecb5d21e2e30106831ec572688b7fd823df7e2593c943f5a7d4914faecdb2a60067da53651c36gid1049010b5e03e806a06f3c2be6b0d852d7ce6f0173967e051c0b4d9e61f732acgid0af4c2f43efaaf6b1c79f3827219075b652dcf8bf5cf9f49ecb73eee29f6a84fgida8cd0cb8abb754deff25960b9d03347385435e6f08b1ab1a3f6cde9cd69885cc&tw=c1e0fc4b7f23d30cb26557e09759c1e638767eb712ad44b0fcd102afb01ec671&version=v2"></script>
+  <script id="wf_anal" src="https://crm.zohopublic.in/crm/WebFormAnalyticsServeServlet?rid=400ec1c8076e30e7b88466195e0c1ac314012b5e5779e06798b96518b085193df825ccb578dff9a8d902b735559c42d9gid8009eeeba3fc7d4371ca8c02fe4271c39341fec73905f84b1ff65d08e63d43a0gid9635dcf789f8677d57acd7ff6df7a8ebd4e2af020afeb9ca73457f1a2b423d26gid93c0c91e5a619fe893f42457a3810b6d3015a746c76f6050d250f9c51d79559f&tw=21baee487063b4cdd4246624057eae74f9be513f934b52cdcd5614727b51edb0&version=v2"></script>
   <!-- Do not remove this --- Analytics Tracking code ends. -->
 
   <!-- Interactive Logic JS -->

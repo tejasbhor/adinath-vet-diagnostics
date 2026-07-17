@@ -437,54 +437,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ==========================================
-  // CRM BACKGROUND SUBMISSION & TOAST HANDLING
+  // ZOHO FORM RESET VISUAL INTEGRATION
   // ==========================================
-  let isFormSubmitting = false;
-  const zohoIframe = document.getElementById("zoho_submit_iframe");
-
   if (quoteForm) {
-    quoteForm.addEventListener("submit", () => {
-      isFormSubmitting = true;
-    });
-  }
-
-  if (zohoIframe) {
-    zohoIframe.addEventListener("load", () => {
-      if (isFormSubmitting) {
-        // Show success notification on the page!
-        showFeedback("Thank you! Your sourcing inquiry has been successfully submitted to Zoho CRM. Our diagnostics product manager in Indore will contact you shortly.", "success");
-        
-        // Reset the form values
-        if (quoteForm) {
-          quoteForm.reset();
+    quoteForm.addEventListener("reset", () => {
+      // Reset visible custom select dropdown text
+      if (customSelectTrigger) {
+        const triggerSpan = customSelectTrigger.querySelector("span");
+        if (triggerSpan) {
+          triggerSpan.textContent = "-- Select Product Category --";
         }
-
-        // Reset submit button text and disabled state
-        const submitBtn = document.querySelector('.crmWebToEntityForm .formsubmit');
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = "Submit Technical Sourcing Inquiry";
-        }
-
-        // Reset visible custom select dropdown text
-        if (customSelectTrigger) {
-          const triggerSpan = customSelectTrigger.querySelector("span");
-          if (triggerSpan) {
-            triggerSpan.textContent = "-- Select Product Category --";
-          }
-        }
-        if (customOptions) {
-          customOptions.forEach(opt => opt.classList.remove("selected"));
-        }
-
-        // Smooth scroll to the form feedback
-        const contactSection = document.getElementById("contact");
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: "smooth" });
-        }
-
-        // Reset the submission flag
-        isFormSubmitting = false;
+      }
+      if (customOptions) {
+        customOptions.forEach(opt => opt.classList.remove("selected"));
       }
     });
   }

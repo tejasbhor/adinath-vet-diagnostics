@@ -2303,3 +2303,68 @@ input:checked + .toggle-slider:before {
   font-weight: 600;
 }
 
+/* ==========================================
+   ZOHO CUSTOM SPLASH MESSAGE TOAST STYLES
+   ========================================== */
+.wf_customMessageBox {
+  font-family: var(--font-primary);
+  color: var(--color-primary);
+  background: var(--color-white);
+  box-shadow: var(--shadow-lg);
+  max-width: 90%;
+  width: max-content;
+  word-break: break-word;
+  z-index: 11000;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-success);
+  min-width: 320px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  animation: slideDownToast 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDownToast {
+  from {
+    transform: translate(-50%, -20px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+.wf_customCircle {
+  position: relative;
+  background-color: var(--color-success);
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  flex: none;
+  margin-right: 12px;
+}
+
+.wf_customCheckMark {
+  box-sizing: unset !important;
+  position: absolute;
+  transform: rotate(45deg) translate(-50%, -50%);
+  left: 7px;
+  top: 11px;
+  height: 9px;
+  width: 4px;
+  border-bottom: 2px solid var(--color-white);
+  border-right: 2px solid var(--color-white);
+}
+
+#wf_splash_info {
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+}
+
