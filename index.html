@@ -721,21 +721,20 @@
           </div>
 
           <!-- Zoho CRM Captcha Verification Row -->
-          <div class="form-row captcha-row">
-            <div class="form-group">
-              <label>Security Verification *</label>
-              <div class="captcha-badge">
+          <div class="form-group captcha-group">
+            <label for="captchaField1294520000001616627">Enter the Captcha *</label>
+            <div class="captcha-wrapper">
+              <div class="captcha-image-card">
                 <img id="imgid1294520000001616627" class="captcha-img" src="https://crm.zoho.in/crm/CaptchaServlet?formId=683b985fd5aebf2b57d5a10c593910a51b5a467245aa2cdca8b3016e88909b2a2e5cd4b9b03e88988c0a68ba821365f8&grpid=cce015b951b7b513cf892f2ef3ca6f86b9d183b686a781ac0878bb385593cad0" alt="Security Verification Captcha">
                 <button type="button" class="btn-captcha-reload" onclick="reloadImg1294520000001616627();" title="Refresh Captcha Code">
                   <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                   <span>Reload</span>
                 </button>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="captchaField1294520000001616627">Enter Captcha Code *</label>
-              <input type="text" id="captchaField1294520000001616627" name="enterdigest" placeholder="Type letters above..." maxlength="10" required autocomplete="off" spellcheck="false" class="captcha-input" aria-label="Enter Captcha Code">
-              <div id="captchaErr1294520000001616627" class="captcha-error-text" aria-live="polite"></div>
+              <div class="captcha-input-box">
+                <input type="text" id="captchaField1294520000001616627" name="enterdigest" placeholder="Enter the characters shown above" maxlength="10" required autocomplete="off" spellcheck="false" class="captcha-input" aria-label="Enter the Captcha">
+                <div id="captchaErr1294520000001616627" class="captcha-error-text" aria-live="polite"></div>
+              </div>
             </div>
           </div>
 
@@ -1118,7 +1117,7 @@
       // Validate Captcha Field
       var capFld = document.getElementById('captchaField1294520000001616627');
       if (capFld && ((capFld.value).replace(/^\s+|\s+$/g, '')).length === 0) {
-        alert('Please enter the security verification code.');
+        alert('Please enter the Captcha characters shown in the image.');
         capFld.focus();
         return false;
       }
