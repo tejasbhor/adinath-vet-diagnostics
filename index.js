@@ -470,6 +470,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (customOptions) {
         customOptions.forEach(opt => opt.classList.remove("selected"));
       }
+      // Reload captcha on form reset
+      if (typeof reloadImg1294520000001616627 === "function") {
+        reloadImg1294520000001616627();
+      }
+      const captchaErr = document.getElementById("captchaErr1294520000001616627");
+      if (captchaErr) {
+        captchaErr.style.display = "none";
+      }
     });
   }
 

@@ -2392,3 +2392,77 @@ input:checked + .toggle-slider:before {
   text-align: left;
 }
 
+/* ==========================================
+   ZOHO CRM CAPTCHA VERIFICATION ROW
+   ========================================== */
+.captcha-row {
+  align-items: flex-start;
+}
+
+.captcha-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background-color: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  min-height: 48px;
+  box-sizing: border-box;
+}
+
+.captcha-img {
+  height: 38px;
+  width: auto;
+  border-radius: 4px;
+  display: block;
+}
+
+.btn-captcha-reload {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-captcha-reload svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+}
+
+.btn-captcha-reload:hover {
+  border-color: var(--color-secondary);
+  background-color: var(--color-accent-light);
+  color: var(--color-secondary-hover);
+}
+
+.btn-captcha-reload:hover svg {
+  transform: rotate(90deg);
+}
+
+.captcha-input {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  font-family: monospace, sans-serif;
+}
+
+.captcha-error-text {
+  color: #ef4444;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 4px;
+  display: none;
+}
+

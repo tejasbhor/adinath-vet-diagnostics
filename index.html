@@ -634,12 +634,15 @@
 
         <form class="contact-form crmWebToEntityForm" id="webform1294520000001616627" action="https://crm.zoho.in/crm/WebToLeadForm" name="WebToLeads1294520000001616627" method="POST" onSubmit='javascript:document.charset="UTF-8"; return checkMandatory1294520000001616627()' accept-charset="UTF-8">
           <!-- Zoho CRM Hidden Fields -->
-          <input type="text" style="display:none;" name="xnQsjsdp" value="3a73f15bb83974bb1f923368a14ec1d3937e81cfe1d23286ba20df935dafb447">
+          <input type="text" style="display:none;" name="xnQsjsdp" value="cce015b951b7b513cf892f2ef3ca6f86b9d183b686a781ac0878bb385593cad0">
           <input type="hidden" name="zc_gad" id="zc_gad" value="">
-          <input type="text" style="display:none;" name="xmIwtLD" value="efbd27d1786eb88155c98e82254056bd3c0fc8ecb8affa06f749a91f37621deb59e4377d0bed40628547d2a580cd2d93">
+          <input type="text" style="display:none;" name="xmIwtLD" value="683b985fd5aebf2b57d5a10c593910a51b5a467245aa2cdca8b3016e88909b2a2e5cd4b9b03e88988c0a68ba821365f8">
           <input type="text" style="display:none;" name="actionType" value="TGVhZHM=">
           <input type="text" style="display:none;" name="returnURL" value="null">
-          <input type="text" type="hidden" style="display: none;" name="aG9uZXlwb3Q" value="">
+          <!-- Do not remove this code. -->
+          <input type="text" style="display:none;" id="ldeskuid" name="ldeskuid">
+          <input type="text" style="display:none;" id="LDTuvid" name="LDTuvid">
+          <input type="text" style="display: none;" name="aG9uZXlwb3Q" value="">
           
           <select style="display:none;" id="Lead_Source" name="Lead Source">
             <option selected value="Website">Website</option>
@@ -717,6 +720,25 @@
             <textarea id="Description" name="Description" placeholder="Describe assay throughput, regulatory approvals required, target species or timeframe..." required aria-required="false" aria-label="Description" aria-multiline="true" style="font-family: Arial, sans-serif;"></textarea>
           </div>
 
+          <!-- Zoho CRM Captcha Verification Row -->
+          <div class="form-row captcha-row">
+            <div class="form-group">
+              <label>Security Verification *</label>
+              <div class="captcha-badge">
+                <img id="imgid1294520000001616627" class="captcha-img" src="https://crm.zoho.in/crm/CaptchaServlet?formId=683b985fd5aebf2b57d5a10c593910a51b5a467245aa2cdca8b3016e88909b2a2e5cd4b9b03e88988c0a68ba821365f8&grpid=cce015b951b7b513cf892f2ef3ca6f86b9d183b686a781ac0878bb385593cad0" alt="Security Verification Captcha">
+                <button type="button" class="btn-captcha-reload" onclick="reloadImg1294520000001616627();" title="Refresh Captcha Code">
+                  <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                  <span>Reload</span>
+                </button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="captchaField1294520000001616627">Enter Captcha Code *</label>
+              <input type="text" id="captchaField1294520000001616627" name="enterdigest" placeholder="Type letters above..." maxlength="10" required autocomplete="off" spellcheck="false" class="captcha-input" aria-label="Enter Captcha Code">
+              <div id="captchaErr1294520000001616627" class="captcha-error-text" aria-live="polite"></div>
+            </div>
+          </div>
+
           <!-- B2B Data Consent Checkbox -->
           <div class="form-group" style="flex-direction: row; align-items: flex-start; gap: 10px; margin-top: 5px;">
             <input type="checkbox" id="formConsentCheck" required style="width: auto; margin-top: 4px;">
@@ -732,6 +754,8 @@
             Submit Inquiry
           </button>
         </form>
+        <!-- Do not remove this code. -->
+        <iframe name="captchaFrame" style="display:none;"></iframe>
       </div>
 
       <!-- Contact Details & Map Column -->
@@ -847,9 +871,6 @@
       </div>
     </div>
 
-    <!-- Zoho SalesIQ Widget Script -->
-    <script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script>
-    <script id="zsiqscript" src="https://salesiq.zohopublic.in/widget?wc=siq6a746a53b6d836422235ea6a556930dc2ffdb767f02a036ef667940d26f5a75e6e9d8cb7f4cdeac1dba1248643572ed4" defer></script>
   </footer>
 
   <!-- ==========================================
@@ -1016,6 +1037,29 @@
       }
       optionElem.querySelectorAll('option') [optionElem.selectedIndex] .ariaSelected = 'true';
     }
+
+    /* Do not remove this code. */
+    function reloadImg1294520000001616627(){
+      var captcha = document.getElementById('imgid1294520000001616627');
+      if (captcha) {
+        if (captcha.src.indexOf('&d') !== -1) {
+          captcha.src = captcha.src.substring(0, captcha.src.indexOf('&d')) + '&d' + new Date().getTime();
+        } else {
+          captcha.src = captcha.src + '&d' + new Date().getTime();
+        }
+      }
+    }
+
+    function historyBack1294520000001616627(){
+      var submitBtn = document.querySelector('.crmWebToEntityForm .formsubmit');
+      if (submitBtn) {
+        submitBtn.removeAttribute('disabled');
+        submitBtn.innerHTML = 'Submit Inquiry';
+      }
+      reloadImg1294520000001616627();
+      window.removeEventListener('focus', historyBack1294520000001616627);
+    }
+
     function validateEmail1294520000001616627(){
       var form = document.forms['WebToLeads1294520000001616627'];
       var emailFld = form.querySelectorAll('[ftype=email]');
@@ -1034,6 +1078,7 @@
       }
       return true;
     }
+
     function checkMandatory1294520000001616627(isAjax){
       var mndFileds = new Array('Company', 'Last Name', 'Email', 'Phone', 'LEADCF5');
       var fldLangVal = new Array('Company', 'Last Name', 'Email', 'Phone', 'Product of Interest');
@@ -1069,6 +1114,17 @@
           } catch (e){}
         }
       }
+
+      // Validate Captcha Field
+      var capFld = document.getElementById('captchaField1294520000001616627');
+      if (capFld && ((capFld.value).replace(/^\s+|\s+$/g, '')).length === 0) {
+        alert('Please enter the security verification code.');
+        capFld.focus();
+        return false;
+      }
+
+      trackVisitor1294520000001616627();
+
       if ( !validateEmail1294520000001616627 () ) {
         return false;
       }
@@ -1097,18 +1153,29 @@
       }
       return true;
     }
+
     function captchaFailedHandling1294520000001616627(message){
       var capErr = document.getElementById('captchaErr1294520000001616627');
       if (capErr) {
-        capErr.innerHTML = message;
-        capErr.style.visibility = 'visible';
+        capErr.innerHTML = message || 'Invalid verification code. Please try again.';
+        capErr.style.display = 'block';
       }
       var capFld = document.getElementById('captchaField1294520000001616627');
-      if (capFld) capFld.focus();
+      if (capFld) {
+        capFld.value = '';
+        capFld.focus();
+      }
+      reloadImg1294520000001616627();
+      let formDom = document.querySelector('.crmWebToEntityForm .formsubmit');
+      if (formDom) {
+        formDom.removeAttribute('disabled');
+        formDom.innerHTML = 'Submit Inquiry';
+      }
       setTimeout(function(){
-        if (capErr) capErr.style.visibility = 'hidden';
-      }, 5000);
+        if (capErr) capErr.style.display = 'none';
+      }, 6000);
     }
+
     document.getElementById('webform1294520000001616627').addEventListener('submit', function(e){
       var ismandatory = checkMandatory1294520000001616627(true);
       e.preventDefault();
@@ -1135,15 +1202,15 @@
                 }
                 var splashinfodom = document.getElementById('wf_splash_info');
                 if (splashinfodom) {
-                  splashinfodom.innerText = "Thank you! Your inquiry has been submitted successfully.";
+                  splashinfodom.innerText = data.actionvalue || "Thank you! Your inquiry has been submitted successfully.";
                 }
                 var splashdom = document.getElementById('wf_splash');
                 if(splashdom) {
-                  // Trigger form reset event (handles resetting form inputs and our custom select dropdown)
+                  // Trigger form reset event
                   document.getElementById('webform1294520000001616627').reset();
                   splashdom.style.display = '';
                   
-                  // Smooth scroll to the splash message popup
+                  // Smooth scroll to splash message
                   const contactSection = document.getElementById("contact");
                   if (contactSection) {
                     contactSection.scrollIntoView({ behavior: "smooth" });
@@ -1151,7 +1218,7 @@
 
                   setTimeout(function(){
                     splashdom.style.display = 'none';
-                  }, 10000);
+                  }, 8000);
                 }
                 if(typeof _wfa_track != 'undefined' && _wfa_track.wfa_post_submit) {
                   _wfa_track.wfa_post_submit(e);
@@ -1171,8 +1238,6 @@
               } else if(data.actionsubmit === 'parent_redirect') {
                 parent.window.location = data.redirectUrl;
               }
-            } else if(data.actionsubmit === 'parent_redirect') {
-              parent.window.location = data.redirectUrl;
             } else if(data.actionsubmit === 'add_hash') {
               document.location.hash = data.hash;
             } else if(data.actionsubmit === 'error_msg') {
@@ -1183,7 +1248,7 @@
                 window.parent.postMessage('checkCaptchaError', '*');
               }
             } else if(data.actionsubmit === 'captcha_error') {
-              alert(data.message);
+              captchaFailedHandling1294520000001616627(data.message);
               if(data.extraAction === 'parent_signal') {
                 window.parent.postMessage('checkCaptchaError', '*');
               }
@@ -1214,10 +1279,12 @@
         });
       }
     });
+
     if (typeof _wfa_fstprtcken == 'undefined') {
       _wfa_fstprtcken = {};
     }
     _wfa_fstprtcken[1294520000001616627] = true;
+
     function tooltipShow1294520000001616627(el){
       var tooltip = el.nextElementSibling;
       var tooltipDisplay = tooltip.style.display;
@@ -1232,8 +1299,50 @@
       }
     }
   </script>
+
+  <!-- Visitor Tracking & SalesIQ Integration -->
+  <script type="text/javascript" id="VisitorTracking">
+    var $zoho = $zoho || {};
+    $zoho.salesiq = $zoho.salesiq || {
+      widgetcode: 'siq6a746a53b6d836422235ea6a556930dc2ffdb767f02a036ef667940d26f5a75e6e9d8cb7f4cdeac1dba1248643572ed4',
+      values: {},
+      ready: function(){}
+    };
+    var d = document;
+    var s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.id = 'zsiqscript';
+    s.defer = true;
+    s.src = 'https://salesiq.zoho.in/widget';
+    var t = d.getElementsByTagName('script')[0];
+    t.parentNode.insertBefore(s, t);
+
+    function trackVisitor1294520000001616627(){
+      try{
+        if ($zoho && $zoho.salesiq && $zoho.salesiq.visitor) {
+          var LDTuvidObj = document.forms['WebToLeads1294520000001616627'] ['LDTuvid'];
+          if (LDTuvidObj && typeof $zoho.salesiq.visitor.uniqueid === 'function') {
+            LDTuvidObj.value = $zoho.salesiq.visitor.uniqueid();
+          }
+          var fullName = '';
+          var firstnameObj = document.forms['WebToLeads1294520000001616627'] ['First Name'];
+          var lastnameObj = document.forms['WebToLeads1294520000001616627'] ['Last Name'];
+          if (firstnameObj && firstnameObj.value) fullName += firstnameObj.value + ' ';
+          if (lastnameObj && lastnameObj.value) fullName += lastnameObj.value;
+          if (fullName.trim() && typeof $zoho.salesiq.visitor.name === 'function') {
+            $zoho.salesiq.visitor.name(fullName.trim());
+          }
+          var emailObj = document.forms['WebToLeads1294520000001616627'] ['Email'];
+          if (emailObj && emailObj.value && typeof $zoho.salesiq.visitor.email === 'function') {
+            $zoho.salesiq.visitor.email(emailObj.value);
+          }
+        }
+      } catch (e){}
+    }
+  </script>
+
   <!-- Do not remove this --- Analytics Tracking code starts -->
-  <script id="wf_anal" src="https://crm.zohopublic.in/crm/WebFormAnalyticsServeServlet?rid=9985e233dc17f83f32bcc4d2b860c36b56f485a363687a79e78f207bec2670224f1f7c7e04044ea5da3b2dc6d1369d9egid23933e0d5bb2977ecff4eed95b97e180a5296620a0ab008b7006e088210b0b20gid0ebb5a561e1652c9454df67dd5eaf56f798f465026e5abecbf774b308d63c831gidb5c241b791122680deb93805033cdf93ba2876de8f2e4f2f79466a7fa718e487&tw=27997fdf439b827298106bc64cd014903f5723d54107c1e9d161788942918947&version=v2"></script>
+  <script id="wf_anal" src="https://crm.zohopublic.in/crm/WebFormAnalyticsServeServlet?rid=7dea8530a841daf40c44c7e982016a1be71be0f2087a6330c5ff58d86da56e26ec4e122814c07adf0dab12417641460bgida1a6cfa03756e4ec3d820239c0521ea8fa43b6b767abf7d5a58fcbb381b43f49gide8c377f139762a5bdf14e2c15c1d85d211416a5aa7d03452b843c0b342217f22gid9f12f919820c237e198014d15ae8e19d4baf74dd7b08c45699bc5b9bfc59bd06&tw=df4d69f9a399aa32b1634e5230dc3f21d745e03783d7e6a19500e38878a82b47&version=v2"></script>
   <!-- Do not remove this --- Analytics Tracking code ends. -->
 
   <!-- Interactive Logic JS -->
